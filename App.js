@@ -1,6 +1,7 @@
 import React from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components/native";
+import * as firebase from "firebase";
 
 import { theme } from "./src/infrastructure/theme/index";
 import {
@@ -8,10 +9,22 @@ import {
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+
+import { Navigation } from "./src/infrastructure/navigator";
+
 import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
-import { Navigation } from "./src/infrastructure/navigator";
 import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCVUAmxVxTECWe7NwELZfwWjHN4Iu-bN9Q",
+  authDomain: "mealstogo-6ead7.firebaseapp.com",
+  projectId: "mealstogo-6ead7",
+  storageBucket: "mealstogo-6ead7.appspot.com",
+  messagingSenderId: "914835591169",
+  appId: "1:914835591169:web:c8634d1bf31c43c2597000",
+};
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
@@ -29,13 +42,15 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <Navigation />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-        </FavouritesContextProvider>
+        <AuthenticationContextProvider>
+          <FavouritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantsContextProvider>
+                <Navigation />
+              </RestaurantsContextProvider>
+            </LocationContextProvider>
+          </FavouritesContextProvider>
+        </AuthenticationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
