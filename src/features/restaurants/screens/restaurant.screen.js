@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { TouchableOpacity } from "react-native";
+import { Platform } from "react-native";
 
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import {
@@ -19,8 +20,10 @@ export const RestaurantScreen = ({ navigation }) => {
   const { favourites } = useContext(FavouritesContext);
   const [isToggled, setIsToggled] = useState(false);
 
+  const isAndroid = Platform.OS === "android";
+
   return (
-    <SafeArea>
+    <SafeArea isAndroid={isAndroid}>
       {isLoading && (
         <LoadingContainer>
           <Loading animating={true} color="tomato" size="large" />

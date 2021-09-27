@@ -19,7 +19,7 @@ export const FavouritesScreen = ({ navigation }) => {
   const { favourites } = useContext(FavouritesContext);
 
   return favourites.length ? (
-    <SafeArea>
+    <SafeArea isAndroid={false}>
       <RestaurantList
         data={favourites}
         renderItem={({ item }) => {
@@ -41,7 +41,7 @@ export const FavouritesScreen = ({ navigation }) => {
       />
     </SafeArea>
   ) : (
-    <NoFavouritesArea>
+    <NoFavouritesArea isAndroid={false}>
       <Text>No favourites yet</Text>
     </NoFavouritesArea>
   );

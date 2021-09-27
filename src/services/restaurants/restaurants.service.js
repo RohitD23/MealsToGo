@@ -6,13 +6,11 @@ export const restaurantsRequest = (location) => {
   return new Promise((resolve, reject) => {
     const mock = mocks[location];
     if (!mock) {
-      reject("Not Found");
+      reject("Not Found Restaurant");
     }
     resolve(mock);
   });
 };
-
-restaurantsRequest().then(restaurantsTransform);
 
 export const restaurantsTransform = ({ results = [] }) => {
   const mappedResults = results.map((restaurant) => {
