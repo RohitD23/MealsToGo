@@ -10,9 +10,11 @@ import { Spacer } from "../../components/spacer/spacer.component";
 import { RestaurantList } from "../restaurants/screens/restaurant.screen.styles";
 import { RestaurantInfoCard } from "../restaurants/components/restaurant-info-card.component";
 
-const NoFavouritesArea = styled(SafeArea)`
+const NoFavouritesArea = styled.View`
+  flex: 1;
   align-items: center;
   justify-content: center;
+  background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 
 export const FavouritesScreen = ({ navigation }) => {
@@ -41,7 +43,7 @@ export const FavouritesScreen = ({ navigation }) => {
       />
     </SafeArea>
   ) : (
-    <NoFavouritesArea isAndroid={false}>
+    <NoFavouritesArea>
       <Text>No favourites yet</Text>
     </NoFavouritesArea>
   );
